@@ -1,0 +1,4 @@
+# Installed on the GPU box only, after torch. Kept apart from requirements.txt
+# so `pip install -r requirements.txt` still works on a laptop with no CUDA.
+omnivoice
+openai-whisper

@@ -1,0 +1,17 @@
+# --- API ---
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.9
+pydantic-settings>=2.5
+python-multipart>=0.0.9        # multipart uploads (voice clips, script files)
+websockets>=13.0               # live job log stream
+
+# --- audio ---
+numpy>=1.26
+soundfile>=0.12
+
+# --- GPU-only, installed by the Docker image / bootstrap.sh ---
+# torch is NOT listed here: the right wheel depends on the CUDA version of the
+# host (cu128 for RTX 50xx / sm_120). See Dockerfile and runpod/README.md.
+# omnivoice
+# openai-whisper

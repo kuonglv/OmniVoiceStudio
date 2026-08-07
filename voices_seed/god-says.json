@@ -1,0 +1,10 @@
+{
+  "label": "God Says",
+  "audio": "GodSays.wav",
+  "description": "Pre-existing clip in voice_templates/. At ~3 minutes it is far longer than the 3–10 s OmniVoice wants — trim before relying on it.",
+  "ref_text": "",
+  "language": "en",
+  "duration": 180.07,
+  "origin": "already in voice_templates/",
+  "created_at": "2026-08-06T11:52:40+00:00"
+}

@@ -1,0 +1,29 @@
+# Local development only — CPU, no GPU, no OmniVoice.
+#
+#   docker compose up --build
+#   → API on http://localhost:8000, UI dev server separately (`cd web && pnpm dev`)
+#
+# Synthesis deliberately fails here; this exists to work on the library, the
+# upload paths, jobs and the UI without renting a GPU. For the real thing see
+# runpod/README.md.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev
+    ports:
+      - "8000:8000"
+    environment:
+      # Blank token = unauthenticated. Fine bound to localhost, never on a pod.
+      OVS_AUTH_TOKEN: ""
+      OVS_DEVICE: cpu
+    volumes:
+      # Live-reload the Python package without rebuilding the image.
+      - ./ovs:/app/ovs:ro
+      - ./voices_seed:/app/voices_seed:ro
+      # Mirrors the pod's /workspace, so the same seeding and layout logic runs.
+      - ./data:/data
+    # `web/out` is mounted only if it has been built; the API serves the UI from
+    # there exactly as the pod does.
+    command: >
+      uvicorn ovs.api.main:app --host 0.0.0.0 --port 8000 --workers 1 --reload
