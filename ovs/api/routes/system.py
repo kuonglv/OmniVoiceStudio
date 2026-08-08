@@ -8,6 +8,7 @@ reports only whether the box is usable, never paths or contents.
 
 from __future__ import annotations
 
+import importlib.util
 import shutil
 
 from fastapi import APIRouter
@@ -46,11 +47,11 @@ def _gpu() -> dict:
 @router.get("/health")
 def health() -> dict:
     gpu = _gpu()
+    # find_spec rather than a real import: importing omnivoice drags in torch
+    # and costs seconds, and /health is polled by the UI on every page load.
     try:
-        omnivoice_installed = __import__("importlib.util", fromlist=["util"]).util.find_spec(
-            "omnivoice"
-        ) is not None
-    except Exception:
+        omnivoice_installed = importlib.util.find_spec("omnivoice") is not None
+    except (ImportError, ValueError):
         omnivoice_installed = False
     return {
         "ok": True,

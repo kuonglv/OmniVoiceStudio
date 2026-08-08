@@ -24,7 +24,9 @@ RUN pnpm build   # → /build/out
 # ---------------------------------------------------------------------------
 # cu128: RTX 50xx is sm_120 and a cu121/cu124 wheel refuses to run on it. This
 # base also covers 4090 / A100 / L40S, so one image fits every pod worth renting.
-FROM runpod/pytorch:2.8.0-py3.11-cuda12.8.1-devel-ubuntu22.04
+# The `-cudnn-` is part of the published tag, not decoration: the variant
+# without it does not exist and the pull fails before anything else runs.
+FROM runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04
 
 # ffmpeg/ffprobe: clip duration probing and whatever soundfile hands off.
 RUN apt-get update \

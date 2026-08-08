@@ -43,7 +43,19 @@ pod, where the whole app is one container behind one HTTP proxy URL.
 intended deployment and covers the volume, the token and the two ways to get
 the code onto a pod.
 
-**On a local CUDA machine:**
+**On this machine, either way:**
+
+```bash
+./start.sh          # venv, deps, UI build if missing, then serve on :8000
+./start.sh --dev    # + reload on Python changes
+./start.sh --help   # --port, --host, --rebuild-web, --api-only, --reinstall
+```
+
+It is safe to rerun: each step is skipped when it is already done. Bound to
+`127.0.0.1` unless you pass `--host`, since a blank `OVS_AUTH_TOKEN` means no
+authentication.
+
+The same by hand, on a local CUDA machine:
 
 ```bash
 python -m venv .venv && . .venv/bin/activate
@@ -76,6 +88,7 @@ something cryptic.
 | `ovs/api/` | FastAPI routes and the bearer-token gate |
 | `web/` | Next.js UI, statically exported and served by the API |
 | `voices_seed/` | starter clips, committed; copied to the volume on first boot |
+| `start.sh` | run it here; `bootstrap.sh` is the pod's equivalent |
 
 ## Notes worth keeping
 
