@@ -1,0 +1,10 @@
+{
+  "label": "Empowersity",
+  "audio": "empowersity.wav",
+  "description": "The channel's own voice, instead of borrowing the Joker clip. Uploaded as Empowersity.m4a and transcoded to 24 kHz mono PCM — soundfile cannot open the AAC original. At 23 s it is longer than the 3–10 s OmniVoice prefers; trim it if cloning drifts.",
+  "ref_text": "",
+  "language": "en",
+  "duration": 23.31,
+  "origin": "voices_seed/Empowersity.m4a (dropped into the repo)",
+  "created_at": "2026-08-26T23:36:07+00:00"
+}
