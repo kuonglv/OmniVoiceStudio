@@ -15,7 +15,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 DATA_DIR="${OVS_DATA_DIR:-/workspace}"
-PORT="${OVS_PORT:-8888}"
+PORT="${OVS_PORT:-8000}"
 
 echo "=== OmniVoice Studio bootstrap ==="
 
