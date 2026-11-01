@@ -123,7 +123,7 @@ Look for `"cuda_available": true`, the right `gpu_name`, and
 | `OVS_OUTPUTS_DIR` | `$OVS_DATA_DIR/outputs` | Override where audio is written |
 | `OVS_MODEL_ID` | `k2-fsa/OmniVoice` | Default HuggingFace model |
 | `OVS_DEVICE` | `cuda:0` | Default torch device |
-| `OVS_WHISPER_MODEL` | `small` | Default Whisper size for the SRT pass |
+| `OVS_WHISPER_MODEL` | `turbo` | Default Whisper size for the SRT pass |
 | `OVS_PORT` | `8000` | Port to serve on |
 | `HF_HOME` | `$OVS_DATA_DIR/hf-cache` | Keeps model weights on the volume |
 

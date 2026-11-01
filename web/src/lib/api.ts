@@ -123,7 +123,7 @@ export interface AsrParams {
   model?: string | null;
   output_format: string;
   max_line_count: number;
-  max_line_width: number;
+  max_line_width?: number | null;
   language?: string | null;
   initial_prompt?: string | null;
   word_timestamps: boolean;

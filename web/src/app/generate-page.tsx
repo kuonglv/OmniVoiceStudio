@@ -41,11 +41,15 @@ const DEFAULT_ASR: AsrParams = {
   model: null,
   output_format: "srt",
   max_line_count: 1,
-  max_line_width: 35,
+  // null: the server picks 35, or 16 for ja/zh/ko, from the language
+  max_line_width: null,
   language: null,
   initial_prompt: null,
   word_timestamps: true,
 };
+
+// Mirrors `_CJK` in ovs/asr.py — only used to show the default line width.
+const CJK = new Set(["ja", "japanese", "zh", "chinese", "yue", "cantonese", "ko", "korean"]);
 
 export function GeneratePage() {
   const [voices, setVoices] = useState<ReferenceVoice[]>([]);
@@ -311,9 +315,18 @@ export function GeneratePage() {
                     <Label htmlFor="wmodel">Whisper model</Label>
                     <Input
                       id="wmodel"
-                      placeholder={system?.defaults.whisper_model ?? "small"}
+                      placeholder={system?.defaults.whisper_model ?? "turbo"}
                       value={asr.model ?? ""}
                       onChange={(e) => setAsr({ ...asr, model: e.target.value || null })}
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="wlang">Subtitle language</Label>
+                    <Input
+                      id="wlang"
+                      placeholder={syn.language || "auto"}
+                      value={asr.language ?? ""}
+                      onChange={(e) => setAsr({ ...asr, language: e.target.value || null })}
                     />
                   </div>
                   <div className="space-y-1.5">
@@ -321,9 +334,10 @@ export function GeneratePage() {
                     <Input
                       id="wwidth"
                       type="number"
-                      value={asr.max_line_width}
+                      placeholder={CJK.has((asr.language || syn.language || "").toLowerCase()) ? "16" : "35"}
+                      value={asr.max_line_width ?? ""}
                       onChange={(e) =>
-                        setAsr({ ...asr, max_line_width: parseInt(e.target.value) || 35 })
+                        setAsr({ ...asr, max_line_width: parseInt(e.target.value) || null })
                       }
                     />
                   </div>

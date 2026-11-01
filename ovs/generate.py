@@ -58,6 +58,9 @@ def run_batch(emit, params: dict) -> dict:
     make_srt: bool = bool(params.get("make_srt"))
     syn = SynthesisParams(**params["synthesis"])
     asr = AsrParams(**params.get("asr", {}))
+    if not asr.language and syn.language:
+        # The script's language is known — don't make Whisper guess it.
+        asr.language = syn.language
 
     out_dir = job_dir(job_id)
     out_dir.mkdir(parents=True, exist_ok=True)

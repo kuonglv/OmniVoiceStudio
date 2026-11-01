@@ -73,7 +73,8 @@ def cmd_say(args: argparse.Namespace) -> int:
     print(f"{wav}  ({result.seconds:.1f}s)")
 
     if args.srt:
-        srt = transcribe(wav, out_dir, AsrParams(model=args.whisper_model),
+        srt = transcribe(wav, out_dir, AsrParams(model=args.whisper_model,
+                                                   language=args.language),
                          on_log=lambda m: print(m, flush=True))
         print(srt)
 

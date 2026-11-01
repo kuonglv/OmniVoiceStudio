@@ -68,7 +68,7 @@ class AsrIn(BaseModel):
     model: str | None = None
     output_format: str = "srt"
     max_line_count: int = 1
-    max_line_width: int = 35
+    max_line_width: int | None = None
     language: str | None = None
     initial_prompt: str | None = None
     word_timestamps: bool = True

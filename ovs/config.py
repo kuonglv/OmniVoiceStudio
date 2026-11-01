@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     model_id: str = "k2-fsa/OmniVoice"
     device: str = "cuda:0"
     # Whisper CLI model size for the optional SRT pass.
-    whisper_model: str = "small"
+    whisper_model: str = "turbo"
 
     # --- Access control -----------------------------------------------------
     # A RunPod pod is reachable at a guessable https://<podid>-8000.proxy.runpod.net
